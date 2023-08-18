@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import CustomNav from "../CustomNav";
 import { userData } from "../../helpers";
-import "./Home.css"; // Import the custom stylesheet for Home component
-import { API_BASE_URL } from "../../helpers";
+import "./Home.css";
+import { Container } from "reactstrap";
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
@@ -11,17 +12,17 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="home-container">
+    <Container>
       <CustomNav />
       <div className="home">
         <h2 className="welcome-header">Welcome, {username || "Player"}</h2>
         {username && (
-          <button className="messages-button" onClick={() => navigate("/messages")}>
+          <Link to="/messages" className="messages-button">
             Start Chatting
-          </button>
+          </Link>
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 

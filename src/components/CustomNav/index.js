@@ -54,10 +54,10 @@ const CustomNav = () => {
             {username !== null && (
               <>
                 <NavItem>
-                  <NavLink href="/profile">Profile</NavLink>
+                <NavLink tag={Link} to="/profile">Profile</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/logout">Logout</NavLink>
+                  <NavLink tag={Link} to="/logout">Logout</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} to="/messages">Friends</NavLink>

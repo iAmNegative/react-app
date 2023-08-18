@@ -4,6 +4,7 @@ import axios from "axios";
 import { userData } from "../../helpers";
 import "./Profile.css"; // Import your custom stylesheet for Profile component
 import { API_BASE_URL } from "../../helpers";
+import { Link } from "react-router-dom";
 
 const { jwt } = userData();
 
@@ -128,9 +129,10 @@ const Profile = () => {
                 Save Changes
               </button>
             ) : (
-              <button className="profile-edit-btn" onClick={handleEditClick}>
+              <Link className="profile-edit-btn" onClick={handleEditClick}>
                 Edit Profile
-              </button>
+              </Link>
+              
             )}
           </p>
         </div>

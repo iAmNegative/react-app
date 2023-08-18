@@ -20,7 +20,7 @@ const MessagesPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/users/`, {
+      const response = await axios.get(`${API_BASE_URL}/api/users`, {
         headers: { Authorization: `Bearer ${jwt}` },
       });
 
