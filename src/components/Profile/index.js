@@ -3,6 +3,7 @@ import CustomNav from "../CustomNav";
 import axios from "axios";
 import { userData } from "../../helpers";
 import "./Profile.css"; // Import your custom stylesheet for Profile component
+import { API_BASE_URL } from "../../helpers";
 
 const { jwt } = userData();
 
@@ -22,7 +23,7 @@ const Profile = () => {
 
   const fetchProfileData = async () => {
     try {
-      const response = await axios.get(`http://localhost:1337/api/users?filters[$and][0][username][$eq]=${username}`,
+      const response = await axios.get(`${API_BASE_URL}/api/users?filters[$and][0][username][$eq]=${username}`,
       {
         headers: { Authorization: `Bearer ${jwt}` },
       }
@@ -56,7 +57,7 @@ const Profile = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`http://localhost:1337/api/users/${id}`, editedProfile,
+      await axios.put(`${API_BASE_URL}/api/users/${id}`, editedProfile,
       
       {
         headers: { Authorization: `Bearer ${jwt}` },

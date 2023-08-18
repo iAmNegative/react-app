@@ -67,7 +67,7 @@ const MessageViewPage = () => {
         },
       };
 
-      await axios.post("http://localhost:1337/api/messages", requestBody, 
+      await axios.post(`${API_BASE_URL}/api/messages`, requestBody, 
       
       {
         headers: { Authorization: `Bearer ${jwt}`},
