@@ -1,33 +1,52 @@
 /* CustomNav.css */
+
 .custom-nav {
-    background-color: #1c1c1c;
-    border-bottom: 3px solid #00bfff;
-  }
-  
+  background-color: #212121;
+  border-bottom: 3px solid #e91e63;
+}
+
+.gaming-navbar {
+  background-color: #000;
+  border-bottom: 3px solid #e91e63;
+}
+
+.gaming-brand {
+  font-size: 28px;
+  font-weight: bold;
+  color: #e91e63;
+  transition: color 0.3s;
+}
+
+.gaming-brand:hover {
+  color: #ff9800;
+}
+
+.navbar-toggler-icon {
+  color: #fff;
+  font-size: 28px;
+}
+
+.navbar-toggler-icon.open {
+  transform: rotate(90deg);
+  transition: transform 0.3s;
+}
+
+.gaming-link {
+  font-size: 18px;
+  color: #fff;
+  transition: color 0.3s;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.gaming-link:hover {
+  color: #c6c6c6;
+}
+
+/* Media queries and other styles as needed */
+
+@media (max-width: 576px) {
   .navbar-toggler-icon {
-    color: #fff;
+    font-size: 24px;
   }
-  
-  .navbar-brand {
-    font-size: 28px;
-    font-weight: bold;
-    color: #00bfff;
-  }
-  
-  .nav-link {
-    font-size: 18px;
-    color: #fff;
-    transition: color 0.3s;
-  }
-  
-  .nav-link:hover {
-    color: #00bfff;
-    text-decoration: none;
-  }
-  
-  @media (max-width: 576px) {
-    .navbar-toggler-icon {
-      font-size: 24px;
-    }
-  }
-  
+}

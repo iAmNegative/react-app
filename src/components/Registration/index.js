@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Col, Row, Button, FormGroup, Input } from 'reactstrap';
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify"; // Import toast and ToastContainer
+import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../helpers";
@@ -23,32 +24,40 @@ const Registration = () => {
     }));
   };
 
-  const handleSignup = async () => {
-    const url = `${API_BASE_URL}/api/auth/local/register`;
-    try {
-      if (user.email && user.password && user.firstName && user.lastName && user.username) {
-        const data = await axios.post(url, user);
-        if (data.error && data.error.name === "ValidationError" && data.error.details) {
-          const errorMessage = data.error.details.errors[0].message;
-          toast.error(errorMessage, {
-            hideProgressBar: true,
-          });
-        } else if (!data.error) {
-          toast.success("Registered successfully!", {
-            hideProgressBar: true,
-          });
-          setUser(initialUser);
-          navigate("/login");
-        }
+const handleSignup = async () => {
+  const url = `${API_BASE_URL}/api/auth/local/register`;
+  try {
+    if (user.email && user.password && user.firstName && user.lastName && user.username) {
+      const response = await axios.post(url, user);
+      if (response.data.error && response.data.error.message) {
+        const errorMessage = response.data.error.message;
+        toast.error(errorMessage, {
+          hideProgressBar: true,
+        });
+      } else if (!response.data.error) {
+        toast.success("Registered successfully!", {
+          hideProgressBar: true,
+        });
+        setUser(initialUser);
+        navigate("/login");
       }
-    } catch (error) {
-      toast.error(error.message, {
+    }
+  } catch (error) {
+    if (error.response) {
+      toast.error(error.response.data.error.message, {
+        hideProgressBar: true,
+      });
+    } else {
+      toast.error("An error occurred while registering. Please try again later.", {
         hideProgressBar: true,
       });
     }
-  };
+  }
+};
+
 
   return (
+    <>
     <Row className="register">
       <Col sm="12" md={{ size: 4, offset: 4 }}>
         <div>
@@ -81,6 +90,8 @@ const Registration = () => {
         </div>
       </Col>
     </Row>
+    <ToastContainer position="top-center" autoClose={5000} />
+    </>
   );
 };
 

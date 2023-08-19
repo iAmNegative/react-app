@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Col, Row, Button, FormGroup, Input } from "reactstrap";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify"; // Import toast and ToastContainer
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { storeUser } from "../../helpers";
-import "./Login.css"; // Import the custom stylesheet for Login component
+import "./Login.css";
 import { API_BASE_URL } from "../../helpers";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const initialUser = { password: "", identifier: "" };
 const Login = () => {
@@ -23,8 +25,7 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-
-    const url = `${API_BASE_URL}/api/auth/local`; // Use the constant here
+    const url = `${API_BASE_URL}/api/auth/local`;
 
     try {
       if (user.identifier && user.password) {
@@ -39,15 +40,16 @@ const Login = () => {
         }
       }
     } catch (error) {
-      toast.error(error.message, {
+      toast.error("Invalid credentials. Please try again.", {
         hideProgressBar: true,
       });
     }
   };
 
   return (
+    <>
     <Row className="login">
-      <Col >
+      <Col>
         <div>
           <h2>Login:</h2>
           <FormGroup>
@@ -79,7 +81,11 @@ const Login = () => {
         </div>
       </Col>
     </Row>
+     <ToastContainer position="top-center" autoClose={5000} />
+     </>
   );
 };
 
 export default Login;
+
+

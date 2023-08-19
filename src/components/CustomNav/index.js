@@ -3,7 +3,7 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } f
 import { userData } from "../../helpers";
 import { Link, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../helpers";
-
+import "./CustomNav.css"; // Import your custom styles
 
 const CustomNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,13 +18,13 @@ const CustomNav = () => {
 
   useEffect(() => {
     const TOKEN_EXPIRATION_TIME = 3 * 60 * 1000; // 3 minutes in milliseconds
-    
+
     const handleTokenExpiration = () => {
       const currentTime = Date.now();
       if (currentTime - lastActivity > TOKEN_EXPIRATION_TIME) {
         localStorage.removeItem("lastActivity");
         localStorage.removeItem("userData");
-        navigate("/login"); // Navigate to login page or show a notification
+        navigate("/login"); // Navigate to the login page or show a notification
       }
     };
 
@@ -34,33 +34,42 @@ const CustomNav = () => {
 
   return (
     <div className="custom-nav">
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/" className="mr-auto">
-          Chater Patter
+      <Navbar expand="md" className="gaming-navbar">
+        <NavbarBrand tag={Link} to="/" className="mr-auto gaming-brand">
+          Promithous
         </NavbarBrand>
-        <NavbarToggler onClick={toggle} className="mr-2" />
+        <NavbarToggler onClick={toggle} className={`navbar-toggler-icon ${isOpen ? 'open' : ''}`} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav navbar>
-            {username === null && (
+          <Nav className="ml-auto" navbar>
+            {username === null ? (
               <>
                 <NavItem>
-                  <NavLink href="/registration">Registration</NavLink>
+                  <NavLink tag={Link} to="/registration" className="gaming-link">
+                    Register
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/login">Login</NavLink>
+                  <NavLink tag={Link} to="/login" className="gaming-link">
+                    Sign In
+                  </NavLink>
                 </NavItem>
               </>
-            )}
-            {username !== null && (
+            ) : (
               <>
                 <NavItem>
-                <NavLink tag={Link} to="/profile">Profile</NavLink>
+                  <NavLink tag={Link} to="/profile" className="gaming-link">
+                    Profile
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} to="/logout">Logout</NavLink>
+                  <NavLink tag={Link} to="/messages" className="gaming-link">
+                    Friends
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} to="/messages">Friends</NavLink>
+                  <NavLink tag={Link} to="/logout" className="gaming-link">
+                    Log Out
+                  </NavLink>
                 </NavItem>
               </>
             )}
