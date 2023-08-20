@@ -4,7 +4,7 @@ import { userData } from "../../helpers";
 import { Link, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../helpers";
 import "./CustomNav.css"; // Import your custom styles
-
+import thunderLogo from "../../thunder-logo.png"; // Adjust the path
 
 const CustomNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,13 +16,6 @@ const CustomNav = () => {
     setIsOpen(!isOpen);
     setLastActivity(Date.now());
   };
-  const handleLogout = () => {
-    localStorage.removeItem("lastActivity");
-    localStorage.removeItem("userData");
-    navigate("/logout"); // Navigate to the LogoutPage
-  };
-
-  
 
   useEffect(() => {
     const TOKEN_EXPIRATION_TIME = 3 * 60 * 1000; // 3 minutes in milliseconds
@@ -32,7 +25,7 @@ const CustomNav = () => {
       if (currentTime - lastActivity > TOKEN_EXPIRATION_TIME) {
         localStorage.removeItem("lastActivity");
         localStorage.removeItem("userData");
-        navigate("/login"); // Navigate to the login page or show a notification
+        navigate("/login");
       }
     };
 
@@ -44,7 +37,8 @@ const CustomNav = () => {
     <div className="custom-nav">
       <Navbar expand="md" className="gaming-navbar">
         <NavbarBrand tag={Link} to="/" className="mr-auto gaming-brand">
-          Promithous
+          <img src={thunderLogo} alt="Thunder Logo" className="thunder-logo" />
+          ThunderChat
         </NavbarBrand>
         <NavbarToggler onClick={toggle} className={`navbar-toggler-icon ${isOpen ? 'open' : ''}`} />
         <Collapse isOpen={isOpen} navbar>
@@ -65,18 +59,13 @@ const CustomNav = () => {
             ) : (
               <>
                 <NavItem>
-                  <NavLink tag={Link} to="/profile" className="gaming-link">
+                  <NavLink tag={Link} to="/profile" className="gaming-link gaming-bold">
                     Profile
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} to="/messages" className="gaming-link">
+                  <NavLink tag={Link} to="/messages" className="gaming-link gaming-bold">
                     Friends
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} to="/logout" className="gaming-link"  >
-                    Log Out 
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -84,7 +73,11 @@ const CustomNav = () => {
                     Images
                   </NavLink>
                 </NavItem>
-
+                <NavItem className="ml-auto">
+                  <NavLink tag={Link} to="/logout" className="gaming-link gaming-red">
+                    Log Out
+                  </NavLink>
+                </NavItem>
               </>
             )}
           </Nav>

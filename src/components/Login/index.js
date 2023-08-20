@@ -51,7 +51,12 @@ const Login = () => {
     <Row className="login">
       <Col>
         <div>
+        <h2>
+  <span className="thunder">Thunder</span>
+  <span className="chat">Chat</span>
+</h2>
           <h2>Login:</h2>
+   
           <FormGroup>
             <input
               type="email"
@@ -76,7 +81,7 @@ const Login = () => {
             Login
           </Button>
           <h6>
-            Click <Link to="/registration">Here</Link> to sign up
+            Click <Link to="/registration">Here</Link> to Sign up
           </h6>
         </div>
       </Col>

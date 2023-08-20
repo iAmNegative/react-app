@@ -66,3 +66,22 @@
     color: #008866;
   }
   
+
+
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Change the color of "Thunder" to yellow */
+h2 span.thunder {
+  color: yellow;
+}
+
+/* Change the color of "Chat" to green */
+h2 span.chat {
+  color: rgb(21, 170, 21);
+}
+
+/* Your existing styles for input, button, and other elements */

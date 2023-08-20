@@ -1,4 +1,9 @@
 /* CustomNav.css */
+.thunder-logo {
+  width: 60px; /* Adjust the size as needed */
+  height: 60px;
+  margin-right: 8px; /* Add spacing between the logo and text */
+}
 
 .custom-nav {
   background-color: #212121;
@@ -11,6 +16,8 @@
 }
 
 .gaming-brand {
+  display: flex;
+  align-items: center; /* Center logo and text vertically */
   font-size: 28px;
   font-weight: bold;
   color: #000000;
@@ -31,6 +38,10 @@
   transition: transform 0.3s;
 }
 
+.navbar-nav {
+  align-items: center; /* Center links vertically */
+}
+
 .gaming-link {
   font-size: 18px;
   color: #000000;
@@ -41,6 +52,21 @@
 
 .gaming-link:hover {
   color: #c6c6c6;
+}
+
+.gaming-bold {
+  font-weight: bold;
+}
+
+.gaming-red {
+  color: red;
+}
+
+/* Make the Thunder logo text bold */
+.thunder-logo,
+.gaming-link.gaming-red,
+.gaming-brand {
+  font-weight: bold;
 }
 
 /* Media queries and other styles as needed */

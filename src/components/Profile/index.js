@@ -98,7 +98,7 @@ const Profile = () => {
             )}
           </p>
           <p>
-            <strong>Middle Name:</strong>{" "}
+            <strong>Middle Name (optional):</strong>{" "}
             {editMode ? (
               <input
                 type="text"
