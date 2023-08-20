@@ -38,7 +38,7 @@ const MessageViewPage = () => {
 
   const getUsersMessage = async (user1, user2, jwt) => {
     try {
-      const response = await axios.get("http://localhost:1337/api/messages?populate=*", {
+      const response = await axios.get('${API_BASE_URL}/api/messages?populate=*', {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

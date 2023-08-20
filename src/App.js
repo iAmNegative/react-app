@@ -9,6 +9,7 @@ import { Protector } from "./helpers";
 import MessagesPage from "./components/MessagesPage";
 import MessageViewPage from "./components/MessageViewPage";
 import Profile from "./components/Profile";
+import MyImage from "./components/MyImage";
 
 function App() {
   // Token expiration handling
@@ -46,6 +47,8 @@ function App() {
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/view-messages/:id" element={<MessageViewPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/images" element={<MyImage/>} />
+
         </Routes>
       </BrowserRouter>
     </Container>

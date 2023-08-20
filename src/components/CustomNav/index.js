@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../helpers";
 import "./CustomNav.css"; // Import your custom styles
 
+
 const CustomNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [lastActivity, setLastActivity] = useState(Date.now());
@@ -15,6 +16,13 @@ const CustomNav = () => {
     setIsOpen(!isOpen);
     setLastActivity(Date.now());
   };
+  const handleLogout = () => {
+    localStorage.removeItem("lastActivity");
+    localStorage.removeItem("userData");
+    navigate("/logout"); // Navigate to the LogoutPage
+  };
+
+  
 
   useEffect(() => {
     const TOKEN_EXPIRATION_TIME = 3 * 60 * 1000; // 3 minutes in milliseconds
@@ -67,10 +75,16 @@ const CustomNav = () => {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} to="/logout" className="gaming-link">
-                    Log Out
+                  <NavLink tag={Link} to="/logout" className="gaming-link"  >
+                    Log Out 
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} to="/Images" className="gaming-link">
+                    Images
+                  </NavLink>
+                </NavItem>
+
               </>
             )}
           </Nav>

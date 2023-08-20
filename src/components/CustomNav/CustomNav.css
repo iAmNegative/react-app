@@ -2,23 +2,23 @@
 
 .custom-nav {
   background-color: #212121;
-  border-bottom: 3px solid #e91e63;
+  border-bottom: 3px solid #ececec;
 }
 
 .gaming-navbar {
-  background-color: #000;
-  border-bottom: 3px solid #e91e63;
+  background-color: #f9f9f9;
+  border-bottom: 5px solid #000000;
 }
 
 .gaming-brand {
   font-size: 28px;
   font-weight: bold;
-  color: #e91e63;
+  color: #000000;
   transition: color 0.3s;
 }
 
 .gaming-brand:hover {
-  color: #ff9800;
+  color: #686766;
 }
 
 .navbar-toggler-icon {
@@ -33,7 +33,7 @@
 
 .gaming-link {
   font-size: 18px;
-  color: #fff;
+  color: #000000;
   transition: color 0.3s;
   text-decoration: none;
   margin: 0 10px;
