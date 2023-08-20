@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "reactstrap";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -23,8 +23,7 @@ function App() {
       // Clear user data and log them out
       localStorage.removeItem("lastActivity");
       localStorage.removeItem("userData");
-      // Optionally, redirect to the login page or show a notification
-      window.location.href = "/login"; // Redirect to the login page after expiration
+      window.location.href = "/#/login"; // Redirect to the login page after expiration
     } else {
       // Update the last activity timestamp
       localStorage.setItem("lastActivity", currentTime);
@@ -32,13 +31,13 @@ function App() {
   };
 
   useEffect(() => {
-    const tokenExpirationInterval = setInterval(handleTokenExpiration, 600000); // Check every 1 second
+    const tokenExpirationInterval = setInterval(handleTokenExpiration, TOKEN_EXPIRATION_TIME);
     return () => clearInterval(tokenExpirationInterval);
   }, []);
 
   return (
     <Container>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Protector Component={Home} />} />
           <Route path="/login" element={<Login />} />
@@ -47,10 +46,9 @@ function App() {
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/view-messages/:id" element={<MessageViewPage />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/images" element={<MyImage/>} />
-
+          <Route path="/images" element={<MyImage />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </Container>
   );
 }
