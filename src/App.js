@@ -13,7 +13,7 @@ import MyImage from "./components/MyImage";
 
 function App() {
   // Token expiration handling
-  const TOKEN_EXPIRATION_TIME = 2 * 60 * 1000; // 2 minutes in milliseconds
+  const TOKEN_EXPIRATION_TIME = 5 * 60 * 1000; // 2 minutes in milliseconds
 
   const handleTokenExpiration = () => {
     const currentTime = Date.now();
