@@ -98,14 +98,19 @@ const Profile = () => {
       if (response.data && response.data[0].id) {
         // Successfully uploaded the image, you can now associate the image ID with the user's profile
         const imageId = response.data[0].id;
+        console.log(imageId);
 
         try {
 
           const requestBody = {
-            userProfile: imageId       
+
+            "data":{
+              "userProfile": imageId 
+            }
+                  
           };
 
-          await axios.put(`${API_BASE_URL}/api/users/${id}`,{
+          await axios.put(`${API_BASE_URL}/api/users/${id}`,requestBody,{
             headers: {
               Authorization: `Bearer ${jwt}`
             },
