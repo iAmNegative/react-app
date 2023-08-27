@@ -4,12 +4,16 @@ import axios from "axios";
 import { userData } from "../../helpers";
 import "./Profile.css"; // Import your custom stylesheet for Profile component
 import { API_BASE_URL } from "../../helpers";
+import { SPRING_BASE_URL } from "../../helpers";
+
 import { Link } from "react-router-dom";
 
 const { jwt } = userData();
 
 const Profile = () => {
   const { id, username, email } = userData();
+  const [profileImage, setProfileImage] = useState("");
+
   const [profileData, setProfileData] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [editedProfile, setEditedProfile] = useState({
@@ -24,19 +28,25 @@ const Profile = () => {
 
   const fetchProfileData = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/users?filters[$and][0][username][$eq]=${username}`,
-      {
-        headers: { Authorization: `Bearer ${jwt}` },
-      }
+
+      const requestBody = {
+        username: username,
+        jwt: jwt,
+      
+      };
+
+
+      const data = await axios.post(`${SPRING_BASE_URL}/get/user/details`,requestBody
 
       );
-      if (response.data.length > 0) {
-        setProfileData(response.data[0]);
+      if (data) {
+        setProfileData(data);
         setEditedProfile({
-          firstName: response.data[0].firstName || "",
-          middleName: response.data[0].middleName || "",
-          lastName: response.data[0].lastName || "",
+          firstName: data.firstName || "",
+          middleName: data.middleName || "",
+          lastName: data.lastName || "",
         });
+        setProfileImage(data.userProfileSmallUrl)
       }
     } catch (error) {
       console.error("Error fetching profile data:", error);
@@ -75,6 +85,22 @@ const Profile = () => {
   return (
     <div>
       <CustomNav />
+      <div className="profile-image">
+        <img
+          src={profileImage || "https://res.cloudinary.com/drzwoxrgj/image/upload/v1693074617/small_Prathamesh_satpute_90f97d88d7.jpg"}
+          alt="Profile"
+          className="profile-image"
+        />
+        
+      </div>
+      {profileImage && (
+          <p>
+            <Link className="profile-edit-btn" >
+              Change Image
+            </Link>
+          </p>
+        )}
+
       <div className="profile">
         <h2 className="profile-header">Profile Information</h2>
         <div className="profile-details">
