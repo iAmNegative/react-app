@@ -68,7 +68,8 @@ Home
 
 .received {
   text-align: left;
-  background-color: rgb(13, 147, 13);
+  background: #ffd500; /* Yellow background */
   padding: 5px;
   margin: 5px 0;
 }
+

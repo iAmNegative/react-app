@@ -15,6 +15,7 @@ const Profile = () => {
   const { id, username, email } = userData();
   const [profileImage, setProfileImage] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const [profileData, setProfileData] = useState({});
   const [editMode, setEditMode] = useState(false);
@@ -85,6 +86,8 @@ const Profile = () => {
   };
   const handleImageUpload = async () => {
     try {
+
+      setUploadingImage(true);
       const formData = new FormData();
       formData.append("files", selectedImage);
       
@@ -120,7 +123,7 @@ const Profile = () => {
         console.error("Error updating profile:", error);
 
         }
-
+        setUploadingImage(false);
         
         // Call your Strapi update API here to associate the image ID with the user's profile
         
@@ -129,6 +132,7 @@ const Profile = () => {
       }
     } catch (error) {
       console.error("Error uploading image:", error);
+      setUploadingImage(false);
     }
   };
   
@@ -158,9 +162,17 @@ const Profile = () => {
           />
         </label>
         {selectedImage && (
-          <button className="profile-upload-btn" onClick={handleImageUpload}>
-            Upload
-          </button>
+          <div className="upload-container">
+            {uploadingImage ? (
+              <div className="loading-overlay">
+                <div className="loading-spinner"></div>
+              </div>
+            ) : (
+              <button className="profile-upload-btn" onClick={handleImageUpload}>
+                Upload
+              </button>
+            )}
+          </div>
         )}
       </div>
 
