@@ -104,9 +104,9 @@ const Profile = () => {
 
           const requestBody = {
 
-            "data":{
+
               "userProfile": imageId 
-            }
+            
                   
           };
 
@@ -138,11 +138,17 @@ const Profile = () => {
       <CustomNav />
       <div className="profile-image">
         <label htmlFor="profileImageInput">
-          <img
+        <img
+         src={selectedImage ? URL.createObjectURL(selectedImage) : profileImage || "https://res.cloudinary.com/drzwoxrgj/image/upload/v1693137223/no_preview_4_b0cb973ff6.png"}
+         alt="Profile"
+         className="profile-image"
+        />
+
+          {/* <img
             src={profileImage || "https://res.cloudinary.com/drzwoxrgj/image/upload/v1693137223/no_preview_4_b0cb973ff6.png"}
             alt="Profile"
             className="profile-image"
-          />
+          /> */}
           <input
             type="file"
             id="profileImageInput"
