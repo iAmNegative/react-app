@@ -18,7 +18,7 @@ const CustomNav = () => {
   };
 
   useEffect(() => {
-    const TOKEN_EXPIRATION_TIME = 3 * 60 * 1000; // 3 minutes in milliseconds
+    const TOKEN_EXPIRATION_TIME = 5 * 60 * 1000; // 3 minutes in milliseconds
 
     const handleTokenExpiration = () => {
       const currentTime = Date.now();
@@ -29,7 +29,7 @@ const CustomNav = () => {
       }
     };
 
-    const tokenExpirationInterval = setInterval(handleTokenExpiration, 10000);
+    const tokenExpirationInterval = setInterval(handleTokenExpiration, 100000);
     return () => clearInterval(tokenExpirationInterval);
   }, [lastActivity, navigate]);
 

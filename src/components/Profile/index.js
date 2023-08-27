@@ -6,6 +6,7 @@ import "./Profile.css"; // Import your custom stylesheet for Profile component
 import { API_BASE_URL } from "../../helpers";
 import { SPRING_BASE_URL } from "../../helpers";
 
+
 import { Link } from "react-router-dom";
 
 const { jwt } = userData();
@@ -13,6 +14,7 @@ const { jwt } = userData();
 const Profile = () => {
   const { id, username, email } = userData();
   const [profileImage, setProfileImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const [profileData, setProfileData] = useState({});
   const [editMode, setEditMode] = useState(false);
@@ -36,17 +38,17 @@ const Profile = () => {
       };
 
 
-      const data = await axios.post(`${SPRING_BASE_URL}/get/user/details`,requestBody
+      const response = await axios.post(`${SPRING_BASE_URL}/get/user/details`,requestBody
 
       );
-      if (data) {
-        setProfileData(data);
+      if (response && response.data) {
+        setProfileData(response.data);
         setEditedProfile({
-          firstName: data.firstName || "",
-          middleName: data.middleName || "",
-          lastName: data.lastName || "",
+          firstName: response.data.firstName || "",
+          middleName: response.data.middleName || "",
+          lastName: response.data.lastName || "",
         });
-        setProfileImage(data.userProfileSmallUrl)
+        setProfileImage(response.data.userProfileSmallUrl)
       }
     } catch (error) {
       console.error("Error fetching profile data:", error);
@@ -81,25 +83,76 @@ const Profile = () => {
       console.error("Error updating profile:", error);
     }
   };
+  const handleImageUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("files", selectedImage);
+      
+      const response = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      
+      if (response.data && response.data[0].id) {
+        // Successfully uploaded the image, you can now associate the image ID with the user's profile
+        const imageId = response.data[0].id;
+
+        try {
+
+          const requestBody = {
+            userProfile: imageId       
+          };
+
+          await axios.put(`${API_BASE_URL}/api/users/${id}`,{
+            headers: {
+              Authorization: `Bearer ${jwt}`
+            },
+          }
+
+       ) } catch (error) {
+        console.error("Error updating profile:", error);
+
+        }
+
+        
+        // Call your Strapi update API here to associate the image ID with the user's profile
+        
+        // Once the image is associated, you can fetch the updated profile data
+        fetchProfileData();
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
+  
 
   return (
     <div>
       <CustomNav />
       <div className="profile-image">
-        <img
-          src={profileImage || "https://res.cloudinary.com/drzwoxrgj/image/upload/v1693074617/small_Prathamesh_satpute_90f97d88d7.jpg"}
-          alt="Profile"
-          className="profile-image"
-        />
-        
-      </div>
-      {profileImage && (
-          <p>
-            <Link className="profile-edit-btn" >
-              Change Image
-            </Link>
-          </p>
+        <label htmlFor="profileImageInput">
+          <img
+            src={profileImage || "https://res.cloudinary.com/drzwoxrgj/image/upload/v1693137223/no_preview_4_b0cb973ff6.png"}
+            alt="Profile"
+            className="profile-image"
+          />
+          <input
+            type="file"
+            id="profileImageInput"
+            accept="image/*"
+            onChange={(event) => setSelectedImage(event.target.files[0])}
+            style={{ display: "none" }}
+          />
+        </label>
+        {selectedImage && (
+          <button className="profile-upload-btn" onClick={handleImageUpload}>
+            Upload
+          </button>
         )}
+      </div>
+
 
       <div className="profile">
         <h2 className="profile-header">Profile Information</h2>

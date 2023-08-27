@@ -61,4 +61,16 @@
     align-items: center;
     margin-top: 20px;
   }
-  
+  /* Profile Image Section */
+.profile-image {
+  text-align: center;
+  margin-top: 20px; /* Added margin-top for spacing */
+}
+
+.profile-image img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
