@@ -1,0 +1,117 @@
+/* Posts.css */
+
+/* Center-align the header and add margin at the bottom */
+.posts-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the header text */
+  .posts-header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #b7e100;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  /* Style the Create Spark button */
+  .create-spark-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .create-spark-button button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Style the posts container */
+  .posts-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+  }
+  
+  /* Style the post cards */
+  .post-card {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the post image */
+  .post-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the post caption */
+  .post-caption {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the post user */
+  .post-user {
+    font-size: 16px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the post interactions */
+  .post-interactions {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+  }
+  
+  /* Style the interaction icons */
+  .like-icon,
+  .comment-icon {
+    display: flex;
+    align-items: center;
+  }
+  
+  .like-icon::before {
+    content: '⚡️';
+    margin-right: 5px;
+  }
+  
+  .comment-icon::before {
+    content: '💬';
+    margin-right: 5px;
+  }
+  /* Style the user thumbnail */
+.user-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #b7e100;
+    margin-right: 10px;
+  }
+  
+  /* Style the post header */
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the username with yellow border */
+  .username {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    display: inline-block;
+    border-left: 2px solid #b7e100;
+    padding-left: 10px;
+  }

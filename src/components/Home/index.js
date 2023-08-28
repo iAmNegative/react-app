@@ -6,7 +6,6 @@ import "./Home.css";
 import { Container } from "reactstrap";
 import { Link } from "react-router-dom";
 
-
 const Home = () => {
   const { username } = userData();
   const navigate = useNavigate();
@@ -17,8 +16,13 @@ const Home = () => {
       <div className="home">
         <h2 className="welcome-header">Welcome, {username || "Player"}</h2>
         {username && (
-          <Link to="/messages" className="messages-button">
+          <Link to="/messages" className="action-button messages-button">
             Start Chatting
+          </Link>
+        )}
+        {username && (
+          <Link to="/posts" className="action-button posts-button">
+            View Posts
           </Link>
         )}
       </div>

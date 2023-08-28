@@ -10,6 +10,7 @@ import MessagesPage from "./components/MessagesPage";
 import MessageViewPage from "./components/MessageViewPage";
 import Profile from "./components/Profile";
 import MyImage from "./components/MyImage";
+import Posts from "./components/Posts";
 
 function App() {
   // Token expiration handling
@@ -47,6 +48,8 @@ function App() {
           <Route path="/view-messages/:id" element={<MessageViewPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/images" element={<MyImage />} />
+          <Route path="/posts" element={<Posts />} />
+
         </Routes>
       </HashRouter>
     </Container>
