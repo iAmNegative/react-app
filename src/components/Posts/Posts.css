@@ -2,116 +2,179 @@
 
 /* Center-align the header and add margin at the bottom */
 .posts-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Style the header text */
-  .posts-header h1 {
-    font-size: 36px;
-    font-weight: bold;
-    color: #b7e100;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  
-  /* Style the Create Spark button */
-  .create-spark-button {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-  }
-  
-  .create-spark-button button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  /* Style the posts container */
-  .posts-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    color: #fff;
-  }
-  
-  /* Style the post cards */
-  .post-card {
-    background-color: #222;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  /* Style the post image */
-  .post-image {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  /* Style the post caption */
-  .post-caption {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  /* Style the post user */
-  .post-user {
-    font-size: 16px;
-    color: #999;
-    margin-bottom: 10px;
-  }
-  
-  /* Style the post interactions */
-  .post-interactions {
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-  }
-  
-  /* Style the interaction icons */
-  .like-icon,
-  .comment-icon {
-    display: flex;
-    align-items: center;
-  }
-  
-  .like-icon::before {
-    content: '⚡️';
-    margin-right: 5px;
-  }
-  
-  .comment-icon::before {
-    content: '💬';
-    margin-right: 5px;
-  }
-  /* Style the user thumbnail */
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: -10px;
+
+}
+
+/* Style the header text */
+.posts-header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  font-style: italic;
+
+  color: #b7e100;
+  letter-spacing: 2px;
+  margin: 0; /* Reset default margin for h1 */
+}
+
+/* Style the Create Spark button */
+.create-spark-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.create-spark-button button {
+  background-color: #9dde1b;
+  color: #000000;
+  font-weight:bold;
+  border: none;
+  border-radius: 25px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+/* Style the posts container */
+.posts-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #fff;
+}
+
+/* Style the post cards */
+.post-card {
+  background-color: #222222;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Style the post image */
+.post-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  position: relative; /* Added for positioning timestamp */
+}
+
+/* Position the timestamp at the bottom right */
+.timestamp {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #b7e100;
+}
+
+/* Style the post caption */
+.post-caption {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Style the post user */
+.post-user {
+  font-size: 16px;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+/* Style the post interactions */
+.post-interactions {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+
+}
+
+/* Style the interaction icons */
+.like-icon,
+.comment-icon {
+  display: flex;
+  align-items: center;
+}
+
+.like-icon::before {
+  content: '⚡️';
+  margin-right: 5px;
+}
+
+.comment-icon::before {
+  content: '💬';
+  margin-right: 5px;
+}
+
+/* Style the user thumbnail */
 .user-thumbnail {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid #b7e100;
-    margin-right: 10px;
-  }
-  
-  /* Style the post header */
-  .post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  /* Style the username with yellow border */
-  .username {
-    font-size: 18px;
-    font-weight: bold;
-    color: #fff;
-    display: inline-block;
-    border-left: 2px solid #b7e100;
-    padding-left: 10px;
-  }
+  width: 15%;
+  height: 15%;
+  border-radius: 50%;
+  border: 3px solid #b7e100;
+  margin-right: 10px;
+  margin-top: -10px;
+
+}
+
+/* Style the post header */
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+/* Style the username with yellow border */
+.username {
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+  border-left: 2px solid #b7e100;
+  padding-left: 5px;
+}
+
+
+.post-date::before {
+  margin-right: 5px;
+}
+/* Style the image input and icon */
+.file-input-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.image-input {
+  display: none; /* Hide the actual input */
+}
+
+.image-icon {
+  font-size: 28px;
+  margin-right: 10px;
+}
+
+/* Style the caption input */
+.caption-input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+
+}
+
+/* Style the ignite button */
+.ignite-button {
+  color: #fff;
+  width: 21%;
+  height: 46px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-size: 19px;
+}
