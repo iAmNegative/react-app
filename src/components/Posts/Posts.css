@@ -24,6 +24,8 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 5px;
+  
+  
 }
 
 .create-spark-button button {
@@ -34,6 +36,9 @@
   border-radius: 25px;
   padding: 5px 20px;
   cursor: pointer;
+  align-items: center;
+  
+
 }
 
 /* Style the posts container */
@@ -177,4 +182,5 @@
   padding: 10px 10px;
   cursor: pointer;
   font-size: 100%;
+
 }

@@ -1,25 +1,20 @@
-/* CustomNav.css */
-
-/* Background Gradient */
-.custom-nav {
-  background: linear-gradient(to bottom, rgba(33, 33, 33, 0.9), rgba(17, 17, 17, 0.9));
-  border-bottom: 5px solid #ececec;
-}
-
-/* Thunder Logo Animation */
 .thunder-logo {
-  width: 60px;
+  width: 60px; /* Adjust the size as needed */
   height: 60px;
-  margin-right: 8px;
-  transition: transform 1s infinite;
+  margin-right: 8px; /* Add spacing between the logo and text */
 }
 
-/* Navbar */
+.custom-nav {
+  background-color: #212121;
+  border-bottom: 5px solid #ececec;
+  margin-top: -10px;
+margin-block-end: 1px; 
+}
+
 .gaming-navbar {
   background-color: #f9f9f9;
   border-bottom: 5px solid #000000;
-  height: 80px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  
 }
 
 /* Navbar Brand */
@@ -85,39 +80,10 @@
   font-weight: bold;
 }
 
-
 /* Media queries and other styles as needed */
 
 @media (max-width: 576px) {
   .navbar-toggler-icon {
     font-size: 20px;
   }
-}
-.navbar-collapse {
-  background-color: white; /* Set background color to white */
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  top: 70px;
-  right: 0;
-  z-index: 1000;
-  display: none;
-  
-}
-.navbar-toggler-icon {
-  font-size: 28px;
-  color: #c6c6c6;
-  transition: transform 0.3s, color 0.3s;
-}
-
-.navbar-toggler-icon.open {
-  transform: rotate(630deg);
-  background: white;
-  color: #000;
-  transition: transform 0.3s, background 0.3s, color 0.3s;
-}
-
-
-.navbar-collapse.show {
-  display: block;
 }
