@@ -40,8 +40,9 @@ const CustomNav = () => {
           <img src={thunderLogo} alt="Thunder Logo" className="thunder-logo" />
           ThunderChat
         </NavbarBrand>
-        <NavbarToggler onClick={toggle} className={`navbar-toggler-icon ${isOpen ? 'open' : ''}`} />
-        <Collapse isOpen={isOpen} navbar>
+        <NavbarToggler onClick={toggle} className={`navbar-toggler-icon ${isOpen ? 'open' : ''}`}>
+          <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`} />
+        </NavbarToggler>        <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             {username === null ? (
               <>

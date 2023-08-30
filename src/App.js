@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "reactstrap";
 import Home from "./components/Home";
@@ -12,29 +12,44 @@ import Profile from "./components/Profile";
 import MyImage from "./components/MyImage";
 import Posts from "./components/Posts";
 
+
 function App() {
-  // Token expiration handling
-  const TOKEN_EXPIRATION_TIME = 5 * 60 * 1000; // 2 minutes in milliseconds
+  const TOKEN_EXPIRATION_TIME = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-  const handleTokenExpiration = () => {
-    const currentTime = Date.now();
-    const lastActivityTime = parseInt(localStorage.getItem("lastActivity")) || 0;
-
-    if (currentTime - lastActivityTime > TOKEN_EXPIRATION_TIME) {
-      // Clear user data and log them out
-      localStorage.removeItem("lastActivity");
-      localStorage.removeItem("userData");
-      window.location.href = "/#/login"; // Redirect to the login page after expiration
-    } else {
-      // Update the last activity timestamp
-      localStorage.setItem("lastActivity", currentTime);
-    }
-  };
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const tokenExpirationInterval = setInterval(handleTokenExpiration, TOKEN_EXPIRATION_TIME);
-    return () => clearInterval(tokenExpirationInterval);
+    const token = localStorage.getItem("token");
+    const loginTime = localStorage.getItem("loginTime");
+
+    if (token && loginTime) {
+      const currentTime = Date.now();
+      if (currentTime - parseInt(loginTime) > TOKEN_EXPIRATION_TIME) {
+        // Token expired, clear token and login time
+        localStorage.removeItem("token");
+        localStorage.removeItem("loginTime");
+        localStorage.removeItem("userData");
+        window.location.href = "/#/login"; // Redirect to the login page after expiration
+
+
+      } else {
+        // Token still valid
+        setLoggedIn(true);
+      }
+    }
   }, []);
+
+  const handleLogin = (token) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("loginTime", Date.now().toString());
+    setLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("loginTime");
+    setLoggedIn(false);
+  };
 
   return (
     <Container>

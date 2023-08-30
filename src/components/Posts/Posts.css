@@ -109,8 +109,8 @@
 
 /* Style the user thumbnail */
 .user-thumbnail {
-  width: 15%;
-  height: 15%;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 3px solid #b7e100;
   margin-right: 10px;
@@ -176,5 +176,5 @@
   border-radius: 5px;
   padding: 10px 10px;
   cursor: pointer;
-  font-size: 19px;
+  font-size: 100%;
 }
