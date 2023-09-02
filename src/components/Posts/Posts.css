@@ -101,6 +101,14 @@
   margin-right: 5px;
 }
 
+.comment-icon{
+  margin-left: 120px;
+  margin-right: auto;
+
+
+}
+
+
 /* Style the comment input and button */
 .comment-input {
   display: flex;
@@ -206,33 +214,32 @@
   font-size: 12px;
 }
 
-/* Style the image input and icon */
-.file-input-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-bottom: 5px;
-  position: relative; /* Add position relative to the parent */
-}
+  /* Style the image input and icon */
+  .file-input-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 7px;
+  }
+  
+  .image-input {
+    display: none; /* Hide the actual input */
+  }
+  
+  .image-icon {
+    font-size: 35px;
+  }
+  
+  /* Style the caption input */
+  .caption-input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    margin-right: 5px;
+    margin-left: 3px;
 
-.image-input {
-  opacity: 0; /* Make the input transparent but still clickable */
-  position: absolute; /* Position the input absolutely */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  position: relative; /* Add position relative to the parent */
-
-
-}
-
-.image-icon {
-  font-size: 35px; /* Adjust the font size as needed */
-  margin-right: 10px;
-  position: relative; /* Add position relative to the parent */
-
-
-}
+  
+  }
 
