@@ -6,6 +6,8 @@ import './Posts.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBolt } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import CustomNav from "../CustomNav";
+
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -65,7 +67,10 @@ const Posts = () => {
   }
   
   // Now, userHasLikedPost is true if the logged-in user has liked the post, and false otherwise.
-  const userHasLikedPost = userLikedPost(posts.map((post) => post.attributes.liked_lists.data).flat());
+    const userHasLikedPost = userLikedPost(posts.map((post) =>   post.attributes.liked_lists.data).flat());
+
+  
+    
 
   const fetchUserThumbnails = async () => {
     try {
@@ -226,7 +231,10 @@ const Posts = () => {
       const initialUserLikes = {};
       response.data.data.forEach((post) => {
         initialLikeCounts[post.id] = post.attributes.likesCount || 0;
-        initialUserLikes[post.id] = userLikedPost(post.attributes.liked_lists.data);
+        if(post.attributes.liked_lists){
+          initialUserLikes[post.id] = userLikedPost(post.attributes.liked_lists.data);
+
+        }
       });
       setLikeCounts(initialLikeCounts);
       setUserLikes(initialUserLikes);
@@ -237,6 +245,7 @@ const Posts = () => {
 
   return (
     <div>
+       <CustomNav />
       <div className="posts-container">
         <div className="posts-header">
           <h1>Sparks</h1>
@@ -358,6 +367,7 @@ const Posts = () => {
           </div>
         ))}
       </div>
+      <></>
     </div>
   );
 };
