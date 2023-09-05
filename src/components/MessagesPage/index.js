@@ -52,6 +52,10 @@ const MessagesPage = () => {
                 <Link to={`/view-messages/${user.id}`}>
                   <button className="view-button">View Messages</button>
                 </Link>
+                <Link to={`/video-chat/${user.id}`}>
+                  <button className="view-button">Video call</button>
+                  
+                </Link>
               </li>
             ))}
           </ul>

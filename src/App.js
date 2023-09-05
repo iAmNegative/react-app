@@ -11,6 +11,10 @@ import MessageViewPage from "./components/MessageViewPage";
 import Profile from "./components/Profile";
 import MyImage from "./components/MyImage";
 import Posts from "./components/Posts";
+import VideoChat from "./components/VideoChat";
+
+
+
 
 
 function App() {
@@ -64,6 +68,9 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/images" element={<MyImage />} />
           <Route path="/posts" element={<Posts />} />
+          <Route path="/video-chat/:id" element={<VideoChat />} />
+
+
 
         </Routes>
       </HashRouter>
