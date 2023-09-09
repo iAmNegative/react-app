@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import CustomNav from "../CustomNav";
 import axios from "axios";
 import { userData } from "../../helpers";
@@ -6,8 +6,9 @@ import { useParams } from "react-router-dom";
 import './chatInterface.css'; // Import the chat interface styles
 import { API_BASE_URL } from "../../helpers";
 import { SPRING_BASE_URL } from "../../helpers";
+import socket from "socket.io-client";
 
-const { jwt } = userData();
+const { jwt,username } = userData();
 
 const MessageViewPage = () => {
   const [messages, setMessages] = useState([]);
@@ -17,28 +18,55 @@ const MessageViewPage = () => {
   const loggedInUserId = userData().id; // Get the logged-in user's ID
   const { id: receiverUserId } = useParams();
   const [successMessage, setSuccessMessage] = useState(null);
+  const io = socket(API_BASE_URL);//Connecting to Socket.io backend
+
+  const messageListRef = useRef(null);
+
+  const scrollMessageListToBottom = () => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  };
 
   useEffect(() => {
     fetchMessages();
     fetchOtherUserName();
+
   }, []);
 
   const fetchMessages = async () => {
     try {
       const response = await getUsersMessage(loggedInUserId, receiverUserId, jwt);
-      console.log("jsonResponse:", response); // Add this line
       setMessages(response);
       setLoading(false);
+
+      scrollMessageListToBottom();
+
     } catch (error) {
       console.error("Error fetching messages:", error);
     }
   };
+
+  useEffect(() => {
+    // io.emit("join", { username }, (error) => { //Sending the username to the backend as the user connects.
+    //   if (error) return alert(error);
+    // });
+    io.on("message", async (data) => {//Listening for a message connection
+      if(data.receiverUser == loggedInUserId){       
+          fetchMessages();
+      
+      }
+    });
+
+  })
+  
+
   
 
 
   const getUsersMessage = async (user1, user2, jwt) => {
     try {
-      const response = await axios.get("https://strapi-deployment-hzpa.onrender.com/api/messages?populate=*", {
+      const response = await axios.get(`${API_BASE_URL}/api/messages?populate=*&pagination[pageSize]=1000`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +96,6 @@ const MessageViewPage = () => {
       }
   
       results.sort((c1, c2) => c1.messageId - c2.messageId);
-      console.error("Error each messages 72:",results);
       return results;
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -100,8 +127,6 @@ const MessageViewPage = () => {
             senderUser,
             receiverUser
         };
-        console.error("Error each messages:", message.receiverUser.userName);
-
         messages.push(message);
 
     }
@@ -149,9 +174,25 @@ const MessageViewPage = () => {
         },
       };
 
+     
+
+
       await axios.post(`${API_BASE_URL}/api/messages`, requestBody, {
         headers: { Authorization: `Bearer ${jwt}` },
       });
+
+      if (newMessage) {
+        io.emit("sendMessage", {
+          receiverUser: receiverUserId
+        }, (error) => {// Sending the message to the backend
+          if (error) {
+            alert(error);
+          }
+        });
+      } else {
+        alert("Message can't be empty");
+      }
+
 
       setSuccessMessage(`The message "${newMessage}" is successfully sent to ${otherUserName}`);
       // Reload the page
@@ -171,7 +212,7 @@ const MessageViewPage = () => {
       <div className="message-view-page">
         <h2>Message View</h2>
         <h3>Conversation with {otherUserName}</h3>
-        <div className="message-list">
+        <div className="message-list" ref={messageListRef}>
           {loading ? (
             <p>Loading messages...</p>
           ) : (

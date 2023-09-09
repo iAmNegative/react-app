@@ -115,6 +115,9 @@
   align-items: center;
   margin-top: 10px;
   padding: 5px;
+
+ 
+  
 }
 
 .comment-input-field {
@@ -136,6 +139,8 @@
   border-radius: 25px;
   padding: 5px 20px;
   cursor: pointer;
+  
+  
 }
 
 

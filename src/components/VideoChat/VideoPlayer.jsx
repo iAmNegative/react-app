@@ -1,21 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+// import React, { useEffect, useRef } from 'react';
 
-export const VideoPlayer = ({ user }) => {
-  const ref = useRef();
+// export const VideoPlayer = ({ user }) => {
+//   const ref = useRef();
 
-  useEffect(() => {
-    user.videoTrack.play(ref.current);
-  }, []);
+//   useEffect(() => {
+//     user.videoTrack.play(ref.current);
+//   }, []);
 
-  return (
-    <div>
-      Uid: {user.uid}
-      <div
-        ref={ref}
-        style={{ width: '200px', height: '200px' }}
-      ></div>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       Uid: {user.uid}
+//       <div
+//         ref={ref}
+//         style={{ width: '200px', height: '200px' }}
+//       ></div>
+//     </div>
+//   );
+// };
 
-export default VideoPlayer;
+// export default VideoPlayer;
