@@ -13,6 +13,7 @@ const MessagesPage = () => {
   const [users, setUsers] = useState([]);
   const [successMessage, setSuccessMessage] = useState(null);
   const { username } = userData();
+  const [joined, setJoined] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -52,10 +53,10 @@ const MessagesPage = () => {
                 <Link to={`/view-messages/${user.id}`}>
                   <button className="view-button">View Messages</button>
                 </Link>
-                <Link to={`/video-chat/${user.id}`}>
+                {/* <Link to={`/video-chat/${user.id}`}>
                   <button className="view-button">Video call</button>
                   
-                </Link>
+                </Link> */}
               </li>
             ))}
           </ul>
