@@ -40,11 +40,13 @@ const MessageViewPage = () => {
       setMessages(response);
       setLoading(false);
 
-      scrollMessageListToBottom();
 
     } catch (error) {
       console.error("Error fetching messages:", error);
     }
+
+    scrollMessageListToBottom();
+
   };
 
   useEffect(() => {
@@ -53,6 +55,7 @@ const MessageViewPage = () => {
     // });
     io.on(loggedInUserId, async (data) => {//Listening for a message connection
         await  fetchMessages();
+        
       
       
     });
