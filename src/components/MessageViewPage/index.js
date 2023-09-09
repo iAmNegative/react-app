@@ -51,11 +51,10 @@ const MessageViewPage = () => {
     // io.emit("join", { username }, (error) => { //Sending the username to the backend as the user connects.
     //   if (error) return alert(error);
     // });
-    io.on("message", async (data) => {//Listening for a message connection
-      if(data.receiverUser == loggedInUserId){       
+    io.on(loggedInUserId, async (data) => {//Listening for a message connection
           fetchMessages();
       
-      }
+      
     });
 
   })
