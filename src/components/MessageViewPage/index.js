@@ -52,7 +52,7 @@ const MessageViewPage = () => {
     //   if (error) return alert(error);
     // });
     io.on(loggedInUserId, async (data) => {//Listening for a message connection
-          fetchMessages();
+        await  fetchMessages();
       
       
     });
