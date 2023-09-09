@@ -21,7 +21,9 @@ const MessageViewPage = () => {
   const io = socket(API_BASE_URL);//Connecting to Socket.io backend
 
   const messageListRef = useRef(null);
-
+  fetchMessages();
+  scrollMessageListToBottom();
+  
   const scrollMessageListToBottom = () => {
     if (messageListRef.current) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
@@ -203,7 +205,9 @@ const MessageViewPage = () => {
 
       setSuccessMessage(`The message "${newMessage}" is successfully sent to ${otherUserName}`);
       // Reload the page
-      window.location.reload();
+      // window.location.reload();
+      fetchMessages();
+      scrollMessageListToBottom();
     } catch (error) {
       console.error("Error sending message:", error);
     }
