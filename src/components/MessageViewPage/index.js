@@ -21,9 +21,8 @@ const MessageViewPage = () => {
   const io = socket(API_BASE_URL);//Connecting to Socket.io backend
 
   const messageListRef = useRef(null);
-  fetchMessages();
-  scrollMessageListToBottom();
-  
+
+
   const scrollMessageListToBottom = () => {
     if (messageListRef.current) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
