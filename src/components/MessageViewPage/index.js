@@ -207,6 +207,7 @@ const MessageViewPage = () => {
       // window.location.reload();
       fetchMessages();
       scrollMessageListToBottom();
+      setNewMessage("");
     } catch (error) {
       console.error("Error sending message:", error);
     }
