@@ -31,15 +31,18 @@ const MessageViewPage = () => {
   useEffect(() => {
     fetchMessages();
     fetchOtherUserName();
+    scrollMessageListToBottom();
+
 
   }, []);
 
   const fetchMessages = async () => {
     try {
-      const response = await getUsersMessage(loggedInUserId, receiverUserId, jwt);
+      const  response = await getUsersMessage(loggedInUserId, receiverUserId, jwt);
       setMessages(response);
       setLoading(false);
 
+       scrollMessageListToBottom();
 
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -54,7 +57,9 @@ const MessageViewPage = () => {
     //   if (error) return alert(error);
     // });
     io.on(loggedInUserId, async (data) => {//Listening for a message connection
-        await  fetchMessages();
+          fetchMessages();
+          scrollMessageListToBottom();
+
         
       
       
