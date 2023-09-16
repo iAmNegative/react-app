@@ -5,7 +5,8 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem("user", "");
+    localStorage.removeItem("loginTime");
+    localStorage.removeItem("user");
     navigate("/login");
   }, [navigate]);
 

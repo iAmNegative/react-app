@@ -13,47 +13,83 @@ import MyImage from "./components/MyImage";
 import Posts from "./components/Posts";
 import VideoChat from "./components/VideoChat";
 
-
-
-
-
 function App() {
   const TOKEN_EXPIRATION_TIME = 5 * 60 * 1000; // 5 minutes in milliseconds
+  const INACTIVITY_TIMEOUT = 3 * 60 * 1000; // 3 minutes in milliseconds
 
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const updateLoginTime = () => {
+    localStorage.setItem("loginTime", Date.now().toString());
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
     const loginTime = localStorage.getItem("loginTime");
+    const user = localStorage.getItem("user");
 
-    if (token && loginTime) {
+
+    const logoutUser = () => {
+      localStorage.removeItem("loginTime");
+      localStorage.removeItem("user");
+      window.location.href = "/#/login"; // Redirect to the login page after expiration
+    };
+
+    const checkTokenValidity = () => {
       const currentTime = Date.now();
-      if (currentTime - parseInt(loginTime) > TOKEN_EXPIRATION_TIME) {
-        // Token expired, clear token and login time
-        localStorage.removeItem("token");
-        localStorage.removeItem("loginTime");
-        localStorage.removeItem("userData");
-        window.location.href = "/#/login"; // Redirect to the login page after expiration
 
-
+      if ( user && loginTime) {
+        if (currentTime - parseInt(loginTime) > TOKEN_EXPIRATION_TIME) {
+          // Token expired, clear token and login time
+          logoutUser();
+        } else {
+          // Token still valid, refresh the inactivity timer
+          updateLoginTime();
+          setLoggedIn(true);
+        }
       } else {
-        // Token still valid
-        setLoggedIn(true);
+        // No token or login time found
+        localStorage.removeItem("loginTime");
+        logoutUser();
       }
-    }
+    };
+
+    // Initial check
+    checkTokenValidity();
   }, []);
 
-  const handleLogin = (token) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("loginTime", Date.now().toString());
-    setLoggedIn(true);
-  };
+  useEffect(() => {
+    // Set up inactivity timer
+    let inactivityTimer;
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loginTime");
-    setLoggedIn(false);
-  };
+    const resetInactivityTimer = () => {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        // Logout user due to inactivity
+        logoutUser();
+      }, INACTIVITY_TIMEOUT);
+    };
+
+    const logoutUser = () => {
+      localStorage.removeItem("loginTime");
+      localStorage.removeItem("user");
+      window.location.href = "/#/login"; // Redirect to the login page after expiration
+    };
+
+    // Event listeners to reset inactivity timer on activity
+    const handleActivity = () => {
+      updateLoginTime();
+      resetInactivityTimer();
+    };
+
+    document.addEventListener("mousemove", handleActivity);
+    document.addEventListener("keydown", handleActivity);
+
+    // Cleanup event listeners
+    return () => {
+      document.removeEventListener("mousemove", handleActivity);
+      document.removeEventListener("keydown", handleActivity);
+    };
+  }, []);
 
   return (
     <Container>
@@ -63,15 +99,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/view-messages/:id" element={<MessageViewPage />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/images" element={<MyImage />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/video-chat/:id" element={<VideoChat />} />
-
-
-
+          <Route path="/messages" element={<Protector Component={MessagesPage} />} />
+          <Route path="/view-messages/:id" element={<Protector Component={MessageViewPage} />} />
+          <Route path="/profile" element={<Protector Component={Profile} />} />
+          <Route path="/images" element={<Protector Component={MyImage} />} />
+          <Route path="/posts" element={<Protector Component={Posts} />} />
+          <Route path="/video-chat/:id" element={<Protector Component={VideoChat} />} />
         </Routes>
       </HashRouter>
     </Container>
